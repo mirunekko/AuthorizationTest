@@ -24,8 +24,8 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright/python:v1.41.0-jammy
     env:
-      AUTH_LOGIN: ${{ secrets.AUTH_LOGIN }}
-      AUTH_PASSWORD: ${{ secrets.AUTH_PASSWORD }}
+      LOGIN: ${{ secrets.LOGIN }}
+      PASSWORD: ${{ secrets.PASSWORD }}
     strategy:
       matrix:
         browser: [remote_chrome]
@@ -38,7 +38,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install dependencies
-        run: pip3 install -r requirements.txt.
+        run: python3 -m pip install -r requirements.txt
       - run: |
           if [ "${{github.event_name}}" = "schedule" ]; then
             export args="-m regression"
